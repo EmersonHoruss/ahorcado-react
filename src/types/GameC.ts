@@ -58,4 +58,11 @@ export class GameC {
   public getState(): StateGameE {
     return this.state;
   }
+  public getQuestion(): string {
+    return words.find((word) => word.word === this.word)?.question ?? "";
+  }
+  public constructor2(game:GameC){
+    
+    new GameC()
+  }
 }

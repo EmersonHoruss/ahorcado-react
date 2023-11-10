@@ -1,3 +1,5 @@
+import { BackgroundColorLetterE } from "./BackgroundColorLetterE";
+import { ColorLetterE } from "./ColorLetterE";
 import { StateLetterE } from "./StateLetterE";
 
 export class LetterC {
@@ -24,5 +26,15 @@ export class LetterC {
   }
   public isRight(): boolean {
     return this.state === StateLetterE.right;
+  }
+  public getColor(): ColorLetterE {
+    return this.hasBeenUsed() ? ColorLetterE.white : ColorLetterE.black;
+  }
+  public getBackgroundColor(): BackgroundColorLetterE {
+    return this.getState() === StateLetterE.started
+      ? BackgroundColorLetterE.transparent
+      : this.getState() === StateLetterE.right
+      ? BackgroundColorLetterE.green
+      : BackgroundColorLetterE.red;
   }
 }
