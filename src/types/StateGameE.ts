@@ -1,5 +1,6 @@
 export enum StateGameE {
   started,
   playing,
-  ended,
+  won,
+  losed
 }

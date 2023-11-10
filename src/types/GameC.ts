@@ -17,22 +17,45 @@ export class GameC {
     this.state = StateGameE.started;
   }
   private generateWord(): string {
-    const random = randomNumber(0, words.length);
-    return words[random].word;
+    const random = randomNumber(0, words.length - 1);
+    return words[random].word.toUpperCase();
   }
   public setPlaying(): void {
     this.state = StateGameE.playing;
   }
-  public setEnded(): void {
-    this.state = StateGameE.ended;
-  }
   public play(letter: string): void {
-    const shouldSubtractAttempts = !this.word.includes(letter) && !this.keyboard.hasBeenUsed(letter)
-    if (shouldSubtractAttempts) {
-      this.attempts--
-      this.keyboard.setState(letter,StateLetterE.wrong)
-    } else {
-      this.keyboard.setState(letter,StateLetterE.right)
+    if (this.attempts >= 1) {
+      const shouldSubtractAttempts =
+        !this.word.includes(letter) && !this.keyboard.hasBeenUsed(letter);
+      if (shouldSubtractAttempts) {
+        this.attempts--;
+        this.keyboard.setState(letter, StateLetterE.wrong);
+      } else {
+        this.keyboard.setState(letter, StateLetterE.right);
+      }
+      this.updateState();
     }
+  }
+  private updateState(): void {
+    if (this.attempts === 0) {
+      this.state = StateGameE.losed;
+      return;
+    }
+    if (this.keyboard.completed(this.word)) {
+      this.state = StateGameE.won;
+      return;
+    }
+  }
+  public getWord(): string {
+    return this.word;
+  }
+  public getKeyboard(): KeyboardC {
+    return this.keyboard;
+  }
+  public getAttempts(): number {
+    return this.attempts;
+  }
+  public getState(): StateGameE {
+    return this.state;
   }
 }
