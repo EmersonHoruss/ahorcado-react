@@ -1,6 +1,8 @@
 import { GameC } from "../../types/GameC";
 import { KeyboardC } from "../../types/KeyboardC";
+import { LetterC } from "../../types/LetterC";
 import { StateGameE } from "../../types/StateGameE";
+import { StateLetterE } from "../../types/StateLetterE";
 
 describe("Test Game Class", () => {
   it("checks constructor", () => {
@@ -29,7 +31,7 @@ describe("Test Game Class", () => {
     const game = new GameC();
     game.setPlaying();
     for (let i = 0; i < GameC.ATTEMPTS; i++) {
-      game.play(KeyboardC.INCORRECT_KEY);
+      game.play(KeyboardC.NOT_FOUND_KEY);
       const lastPlay = i === GameC.ATTEMPTS - 1;
       if (lastPlay) {
         expect(game.getState()).toBe(StateGameE.losed);
@@ -38,5 +40,22 @@ describe("Test Game Class", () => {
       }
     }
     expect(game.getAttempts()).toBe(0);
+  });
+  it("checks status key well", () => {
+    const game: GameC = new GameC();
+    const word: string = game.getWord();
+    const wrongLetter: string | null = game.getKeyboard().getWrongLetter(word);
+    if (!!wrongLetter) {
+      game.play(wrongLetter);
+      const wrongLetterC: LetterC | null =
+        game
+          .getKeyboard()
+          .getLetters()
+          .find((letter: LetterC) => letter.getLetter() === wrongLetter) ??
+        null;
+      if (!!wrongLetterC) {
+        expect(wrongLetterC.getState()).toBe(StateLetterE.wrong);
+      }
+    }
   });
 });

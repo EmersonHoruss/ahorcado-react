@@ -4,7 +4,7 @@ import { StateLetterE } from "./StateLetterE";
 export class KeyboardC {
   public static START_KEY: number = 65; // 65=A
   public static END_KEY: number = 90; // 90=Z
-  public static INCORRECT_KEY: string = "_";
+  public static NOT_FOUND_KEY: string = "_";
   private letters: LetterC[];
   constructor() {
     this.letters = [];
@@ -44,5 +44,13 @@ export class KeyboardC {
       .filter((letter: LetterC) => letter.isRight())
       .map((letter: LetterC) => letter.getLetter())
       .join("");
+  }
+  public getWrongLetter(word: string): string | null {
+    for (const letterC of this.letters) {
+      if (!word.includes(letterC.getLetter())) {
+        return letterC.getLetter();
+      }
+    }
+    return null;
   }
 }

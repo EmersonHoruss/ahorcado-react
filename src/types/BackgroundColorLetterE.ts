@@ -1,5 +1,5 @@
 export enum BackgroundColorLetterE {
-  red,
-  green,
-  transparent,
+  red="red",
+  green="green",
+  transparent="transparent",
 }

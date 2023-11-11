@@ -1,4 +1,4 @@
 export enum ColorLetterE {
-  black,
-  white,
+  black = "black",
+  white = "white",
 }

@@ -24,9 +24,8 @@ export class GameC {
     this.state = StateGameE.playing;
   }
   public play(letter: string): void {
-    if (this.attempts >= 1) {
-      const shouldSubtractAttempts =
-        !this.word.includes(letter) && !this.keyboard.hasBeenUsed(letter);
+    if (this.attempts >= 1 && !this.keyboard.hasBeenUsed(letter)) {
+      const shouldSubtractAttempts = !this.word.includes(letter);
       if (shouldSubtractAttempts) {
         this.attempts--;
         this.keyboard.setState(letter, StateLetterE.wrong);
