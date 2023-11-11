@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { GameContext } from "../context/GameContext";
 
 function Question() {
-  return (
-    <div>
-      
-    </div>
-  )
+  const { game } = useContext(GameContext);
+  return <div className="flex w-full h-full">
+    <h2 className="text-lg sm:text-2xl">{game.getQuestion()}:</h2>
+  </div>;
 }
 
-export default Question
+export default Question;

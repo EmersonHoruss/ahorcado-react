@@ -9,7 +9,7 @@ export class GameC {
   private keyboard: KeyboardC;
   private attempts: number;
   private state: StateGameE;
-  public static ATTEMPTS: number = 5;
+  public static ATTEMPTS: number = 6;
   constructor() {
     this.word = this.generateWord();
     this.keyboard = new KeyboardC();
@@ -61,8 +61,13 @@ export class GameC {
   public getQuestion(): string {
     return words.find((word) => word.word === this.word)?.question ?? "";
   }
-  public constructor2(game:GameC){
-    
-    new GameC()
+  public hasLostAtLeastOneAttempt(): boolean {
+    return GameC.ATTEMPTS !== this.attempts;
+  }
+  public attemptsLost(): number {
+    return GameC.ATTEMPTS - this.attempts;
+  }
+  public attemptsLeft(): number {
+    return this.attempts;
   }
 }
