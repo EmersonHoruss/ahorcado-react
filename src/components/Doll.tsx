@@ -11,9 +11,16 @@ function Doll() {
       : "grid-rows-[minmax(15rem,16rem)] grid-cols-[minmax(8rem,10rem)] justify-center sm:grid-rows-[minmax(20rem,23rem)] sm:grid-cols-[auto]";
     return `${common} ${responsive}`;
   };
+  const getWrapperDollComponentClassNames = (): string => {
+    const common: string = "flex flex-col h-full w-full gap-2 sm:pl-4";
+    const responsive: string = !game.hasLostAtLeastOneAttempt()
+      ? ""
+      : "justify-between";
+    return `${common} ${responsive}`;
+  };
   return (
-    <div className="flex flex-col justify-between h-full w-full gap-2">
-      <div className="flex justify-between text-sm w-full sm:pt-2 sm:pl-4">
+    <div className={getWrapperDollComponentClassNames()}>
+      <div className="flex justify-between text-sm w-full sm:pt-2">
         <span className="text-bold font-semibold">Attempts</span>
         <div className="flex gap-4">
           <span>
