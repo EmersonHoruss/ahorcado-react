@@ -69,4 +69,10 @@ export class GameC {
   public attemptsLeft(): number {
     return this.attempts;
   }
+  public won(): boolean {
+    return this.getState() === StateGameE.won;
+  }
+  public lost(): boolean {
+    return this.getState() === StateGameE.losed;
+  }
 }

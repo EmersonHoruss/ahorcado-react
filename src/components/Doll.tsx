@@ -36,7 +36,6 @@ function Doll() {
             src={`images/el_ahorcado${game.attemptsLost()}.png`}
             alt=""
             className="w-full h-full"
-            // className="w-36 h-60"
           />
         )}
       </div>
